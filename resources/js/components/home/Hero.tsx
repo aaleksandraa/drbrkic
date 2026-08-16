@@ -201,7 +201,15 @@ export default function Hero({ visits, news }: HeroProps) {
             />
             <div
                 aria-hidden="true"
-                className="absolute inset-0 -z-10"
+                className="absolute inset-0 -z-10 lg:hidden"
+                style={{
+                    background:
+                        'linear-gradient(to bottom, rgb(8 33 30 / 0.24) 0%, rgb(8 33 30 / 0.34) 32%, rgb(8 33 30 / 0.78) 48%, rgb(8 33 30 / 0.92) 72%, rgb(8 33 30 / 0.97) 100%)',
+                }}
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 hidden lg:block"
                 style={{
                     background:
                         'linear-gradient(to bottom, rgb(8 33 30 / 0.22) 0%, rgb(8 33 30 / 0.28) 32%, rgb(8 33 30 / 0.55) 58%, rgb(8 33 30 / 0.84) 78%, rgb(8 33 30 / 0.96) 100%)',
