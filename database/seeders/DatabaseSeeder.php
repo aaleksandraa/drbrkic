@@ -24,10 +24,13 @@ class DatabaseSeeder extends Seeder
         $this->seedNews($departments);
         $this->seedSpecialistVisits($departments);
 
-        User::factory()->create([
-            'name' => 'Administrator',
-            'email' => 'admin@drbrkic.ba',
-        ]);
+        User::updateOrCreate(
+            ['email' => 'admin@drbrkic.ba'],
+            [
+                'name' => 'Administrator',
+                'password' => env('ADMIN_PASSWORD', 'password'),
+            ],
+        );
     }
 
     private function seedSettings(): void
