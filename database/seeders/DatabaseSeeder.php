@@ -12,11 +12,14 @@ use App\Models\SpecialistVisit;
 use App\Models\User;
 use App\Support\ImagingPreparation;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Cache;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        Cache::flush();
+
         $this->seedSettings();
         $departments = $this->seedDepartments();
         $services = $this->seedServices($departments);
@@ -31,6 +34,14 @@ class DatabaseSeeder extends Seeder
                 'password' => env('ADMIN_PASSWORD', 'password'),
             ],
         );
+
+        $this->command?->info(sprintf(
+            'Sadržaj u bazi: %d odjeljenja, %d usluga, %d doktora, %d vijesti.',
+            Department::count(),
+            Service::count(),
+            Doctor::count(),
+            NewsArticle::count(),
+        ));
     }
 
     private function seedSettings(): void
@@ -227,8 +238,8 @@ class DatabaseSeeder extends Seeder
 
         $out = [];
         foreach ($rows as $row) {
-            $row['is_active'] = true;
-            $row['show_on_home'] = true;
+            $row['is_active'] = 1;
+            $row['show_on_home'] = 1;
             $row['seo_title'] = $row['page_title'];
             $row['seo_description'] = $row['short_description'];
             $out[$row['slug']] = Department::updateOrCreate(['slug' => $row['slug']], $row);
@@ -260,7 +271,7 @@ class DatabaseSeeder extends Seeder
                     ['question' => 'Šta prijaviti osoblju prije MR pregleda?', 'answer' => 'Obavezno prijavite strano tijelo, gelere, pejsmejker i feromagnetne implantate. Ako imate implantat, ponesite identifikacionu karticu implantata.'],
                     ['question' => 'Kako se pripremiti za MR abdomena, MRCP ili enterografiju?', 'answer' => 'Jedan dan prije pregleda prestanite sa čvrstom hranom i pijte samo bistre napitke. Crijeva se čiste laksativom u dvije doze — uveče prije pregleda i ujutru na dan pregleda — uz dodatnih 1,5–2 litre vode ili čaja.'],
                 ],
-                'sort_order' => 1, 'show_on_home' => true,
+                'sort_order' => 1, 'show_on_home' => 1,
             ],
             [
                 'department' => 'radiologija', 'name' => 'CT dijagnostika', 'slug' => 'ct-dijagnostika',
@@ -276,7 +287,7 @@ class DatabaseSeeder extends Seeder
                     ['question' => 'Kako se pripremiti za CT koronarografiju?', 'answer' => 'Ne preskačite redovnu terapiju za krvni pritisak i srce. Ne pijte kafu, čaj, energetska pića ni alkohol prije pregleda i ne jedite 3–4 sata prije snimanja.'],
                     ['question' => 'Kako se pripremiti za CT abdomena?', 'answer' => 'Jedan dan prije pregleda prestanite sa čvrstom hranom i pijte samo bistre napitke. Crijeva se čiste laksativom u dvije doze, uz dodatnih 1,5–2 litre vode ili čaja. Dodatna priprema se po potrebi vrši u ordinaciji.'],
                 ],
-                'sort_order' => 2, 'show_on_home' => true,
+                'sort_order' => 2, 'show_on_home' => 1,
             ],
             [
                 'department' => 'radiologija', 'name' => 'RTG i mamografija', 'slug' => 'rtg-i-mamografija',
@@ -290,7 +301,7 @@ class DatabaseSeeder extends Seeder
                     ['question' => 'Da li je potrebno zakazivanje?', 'answer' => 'Preporučujemo zakazivanje telefonom radi kraćeg čekanja.'],
                     ['question' => 'Šta skinuti prije RTG snimanja?', 'answer' => 'Uklonite odjeću sa cirkonima, grudnjak, nakit, pirsing, metal i zubne proteze sa metalnim žicama, kako bi se izbjegli artefakti na snimku.'],
                 ],
-                'sort_order' => 3, 'show_on_home' => true,
+                'sort_order' => 3, 'show_on_home' => 1,
             ],
             [
                 'department' => 'radiologija', 'name' => 'Ultrazvuk', 'slug' => 'ultrazvuk',
@@ -299,7 +310,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Ultrazvučna dijagnostika abdomena, štitne žlijezde, dojki, krvnih sudova i mekih tkiva.',
                 'description' => 'Ultrazvučna dijagnostika abdomena, štitne žlijezde, dojki, krvnih sudova i mekih tkiva.',
                 'duration' => 'Prema vrsti pregleda',
-                'sort_order' => 4, 'show_on_home' => true,
+                'sort_order' => 4, 'show_on_home' => 1,
             ],
             [
                 'department' => 'laboratorija', 'name' => 'Laboratorijske analize', 'slug' => 'laboratorijske-analize',
@@ -308,7 +319,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Biohemijske, hematološke, hormonske i druge laboratorijske analize.',
                 'description' => 'Biohemijske, hematološke, hormonske i druge laboratorijske analize.',
                 'duration' => 'Prema vrsti pregleda',
-                'sort_order' => 4, 'show_on_home' => true,
+                'sort_order' => 4, 'show_on_home' => 1,
             ],
             [
                 'department' => 'medicina-rada', 'name' => 'Medicina rada', 'slug' => 'medicina-rada',
@@ -317,7 +328,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Ljekarski pregledi i uvjerenja za radnike, vozače i firme.',
                 'description' => 'Ljekarski pregledi i uvjerenja za radnike, vozače i firme.',
                 'duration' => 'Prema vrsti pregleda',
-                'sort_order' => 5, 'show_on_home' => true,
+                'sort_order' => 5, 'show_on_home' => 1,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Pregled fizijatra', 'slug' => 'pregled-fizijatra',
@@ -329,7 +340,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Ponesite prethodne nalaze i snimke ako ih imate.', 'Pripremite informacije o trajanju bola i dosadašnjoj terapiji.'],
                 'process' => ['Razgovor o tegobama', 'Klinički pregled lokomotornog sistema', 'Pregled dokumentacije', 'Plan terapije i preporuke'],
                 'duration' => '20–30 minuta', 'price' => '60,00 KM',
-                'sort_order' => 6, 'show_on_home' => true,
+                'sort_order' => 6, 'show_on_home' => 1,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Dekompresiona terapija kičme', 'slug' => 'dekompresiona-terapija-kicme',
@@ -341,7 +352,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Ponesite nalaze MR, CT ili RTG snimanja.', 'Terapija se provodi nakon procjene fizijatra.'],
                 'process' => ['Procjena indikacija', 'Pozicioniranje za terapiju', 'Kontrolisana dekompresija', 'Praćenje reakcije i preporuke'],
                 'duration' => 'Prema planu fizijatra', 'price' => 'Trakcija kičmenog stuba 50,00 KM',
-                'sort_order' => 7, 'show_on_home' => false,
+                'sort_order' => 7, 'show_on_home' => 0,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'DEXA osteodenzitometrija', 'slug' => 'dexa',
@@ -353,7 +364,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Posebna priprema najčešće nije potrebna.', 'Ponesite prethodne DEXA nalaze ako ih imate.'],
                 'process' => ['Kratak prijem i priprema', 'Pozicioniranje za snimanje', 'DEXA mjerenje', 'Očitavanje i preporuke prema nalazu'],
                 'duration' => '15–20 minuta', 'price' => 'DEXA snimak 50,00 KM · DEXA sa očitavanjem 80,00 KM',
-                'sort_order' => 8, 'show_on_home' => true,
+                'sort_order' => 8, 'show_on_home' => 1,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Limfna drenaža', 'slug' => 'limfna-drenaza',
@@ -380,7 +391,7 @@ class DatabaseSeeder extends Seeder
                 'duration' => 'Prema dogovorenom tretmanu',
                 'seo_title' => 'Limfna drenaža u Doboju - ZU SC Dr Brkić',
                 'seo_description' => 'Limfna drenaža u Doboju: tretmani kod otoka, limfedema i lipoedema u saradnji sa Gordanom Kolb iz Švajcarske. Zakazivanje preko recepcije, WhatsApp i Viber.',
-                'sort_order' => 9, 'show_on_home' => true,
+                'sort_order' => 9, 'show_on_home' => 1,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Fizikalna terapija', 'slug' => 'fizikalna-terapija',
@@ -392,7 +403,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Terapije se primjenjuju prema preporuci fizijatra.', 'Obucite udobnu odjeću i ponesite nalaze.'],
                 'process' => ['Procjena i plan terapije', 'Primjena preporučenih procedura', 'Praćenje reakcije na terapiju', 'Korekcija plana prema napretku'],
                 'duration' => 'Prema terapijskom planu', 'price' => 'Fizikalni paket 20,00 KM',
-                'sort_order' => 9, 'show_on_home' => true,
+                'sort_order' => 9, 'show_on_home' => 1,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Laseroterapija', 'slug' => 'laseroterapija',
@@ -404,7 +415,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Terapija se provodi prema preporuci stručnog osoblja.', 'Obavijestite terapeuta o osjetljivosti kože i prethodnim tretmanima.'],
                 'process' => ['Priprema regije tretmana', 'Primjena laserske stimulacije', 'Praćenje reakcije tkiva', 'Preporuka narednih tretmana'],
                 'duration' => 'Kratka terapijska procedura', 'price' => '15,00 KM',
-                'sort_order' => 10, 'show_on_home' => false,
+                'sort_order' => 10, 'show_on_home' => 0,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Ultrazvučna terapija', 'slug' => 'ultrazvucna-terapija',
@@ -416,7 +427,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Terapija se određuje prema nalazu i planu fizijatra.', 'Područje tretmana treba biti dostupno terapeutu.'],
                 'process' => ['Odabir regije tretmana', 'Primjena terapijskog ultrazvuka', 'Praćenje reakcije', 'Nastavak plana rehabilitacije'],
                 'duration' => 'Prema terapijskom planu',
-                'sort_order' => 11, 'show_on_home' => false,
+                'sort_order' => 11, 'show_on_home' => 0,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Horizontalna terapija', 'slug' => 'horizontalna-terapija',
@@ -428,7 +439,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Prije terapije prijavite implantate, endoproteze, proširene vene ili hematome.', 'Terapija se provodi nakon stručne procjene.'],
                 'process' => ['Procjena indikacija', 'Postavljanje elektroda', 'Primjena H-struje', 'Praćenje terapijskog efekta'],
                 'duration' => 'Prema terapijskom planu',
-                'sort_order' => 12, 'show_on_home' => false,
+                'sort_order' => 12, 'show_on_home' => 0,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Shockwave terapija', 'slug' => 'shockwave-terapija',
@@ -440,7 +451,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Ponesite nalaze koji se odnose na bolno područje.', 'Terapija se primjenjuje nakon procjene indikacija.'],
                 'process' => ['Odabir područja tretmana', 'Primjena akustičnih talasa', 'Praćenje reakcije', 'Plan narednih tretmana'],
                 'duration' => 'Prema terapijskom planu',
-                'sort_order' => 13, 'show_on_home' => false,
+                'sort_order' => 13, 'show_on_home' => 0,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Medicinska i relax masaža', 'slug' => 'medicinska-relax-masaza',
@@ -452,7 +463,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Obavijestite terapeuta o bolnim tačkama i ranijim povredama.', 'Dođite u udobnoj odjeći.'],
                 'process' => ['Kratka procjena tegoba', 'Odabir vrste masaže', 'Manuelni tretman', 'Preporuke za nastavak njege'],
                 'duration' => 'Prema dogovorenom tretmanu', 'price' => '10,00–20,00 KM',
-                'sort_order' => 14, 'show_on_home' => false,
+                'sort_order' => 14, 'show_on_home' => 0,
             ],
             [
                 'department' => 'fizijatrija', 'name' => 'Hidžama i cupping terapija', 'slug' => 'hidzama-cupping-terapija',
@@ -464,7 +475,7 @@ class DatabaseSeeder extends Seeder
                 'preparation' => ['Prije tretmana navedite zdravstvena stanja i terapiju koju koristite.', 'Tretman se provodi nakon procjene stručnog osoblja.'],
                 'process' => ['Razgovor i procjena', 'Priprema područja tretmana', 'Hidžama ili suvi cupping', 'Manuelna masaža prema potrebi'],
                 'duration' => 'Prema vrsti tretmana',
-                'sort_order' => 15, 'show_on_home' => false,
+                'sort_order' => 15, 'show_on_home' => 0,
             ],
             [
                 'department' => 'porodicna-medicina', 'name' => 'Sistematski pregledi', 'slug' => 'sistematski-pregledi',
@@ -473,7 +484,7 @@ class DatabaseSeeder extends Seeder
                 'summary' => 'Sistematski pregledi za pojedince i firme.',
                 'description' => 'Sistematski pregledi za pojedince i firme.',
                 'duration' => 'Prema vrsti pregleda',
-                'sort_order' => 16, 'show_on_home' => true,
+                'sort_order' => 16, 'show_on_home' => 1,
             ],
         ];
 
@@ -485,7 +496,7 @@ class DatabaseSeeder extends Seeder
 
             $row['department_id'] = $departments[$departmentSlug]->id;
             $row['image_path'] = $serviceCrops[$i % count($serviceCrops)];
-            $row['is_active'] = true;
+            $row['is_active'] = 1;
             $row['benefits'] = $row['benefits'] ?? $defaultBenefits;
             $row['preparation'] = $row['preparation'] ?? $defaultPreparation;
             $row['process'] = $row['process'] ?? $defaultProcess;
@@ -555,8 +566,8 @@ class DatabaseSeeder extends Seeder
             unset($row['services'], $row['department']);
 
             $row['department_id'] = $departments[$departmentSlug]->id;
-            $row['is_active'] = true;
-            $row['show_on_home'] = true;
+            $row['is_active'] = 1;
+            $row['show_on_home'] = 1;
             $row['seo_title'] = $row['name'].' - '.$row['title'].' | ZU SC Dr Brkić Doboj';
             $row['seo_description'] = $row['short_bio'];
 
@@ -573,7 +584,7 @@ class DatabaseSeeder extends Seeder
             $categories[$name] = NewsCategory::updateOrCreate(['slug' => $slug], [
                 'name' => $name,
                 'sort_order' => $i + 1,
-                'is_active' => true,
+                'is_active' => 1,
             ]);
         }
 
@@ -695,7 +706,7 @@ class DatabaseSeeder extends Seeder
             $row['news_category_id'] = $categories[$categoryName]->id;
             $row['department_id'] = $departmentSlug ? $departments[$departmentSlug]->id : null;
             $row['status'] = 'published';
-            $row['show_on_home'] = true;
+            $row['show_on_home'] = 1;
             $row['seo_title'] = $row['title'].' | ZU SC Dr Brkić Doboj';
             $row['seo_description'] = $row['excerpt'];
 
@@ -723,7 +734,7 @@ class DatabaseSeeder extends Seeder
         foreach ($rows as $i => $row) {
             SpecialistVisit::updateOrCreate(
                 ['doctor_name' => $row['doctor_name'], 'visit_date' => $row['visit_date'], 'start_time' => $row['start_time']],
-                $row + ['department_id' => $specialist->id, 'sort_order' => $i + 1, 'is_active' => true, 'show_on_home' => true],
+                $row + ['department_id' => $specialist->id, 'sort_order' => $i + 1, 'is_active' => 1, 'show_on_home' => 1],
             );
         }
     }

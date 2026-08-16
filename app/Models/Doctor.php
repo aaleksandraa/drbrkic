@@ -28,11 +28,11 @@ class Doctor extends Model
 
     public function scopeActive(Builder $query): Builder
     {
-        return $query->where('is_active', true);
+        return $query->where('is_active', 1);
     }
 
     public function scopeForHome(Builder $query): Builder
     {
-        return $query->active()->where('show_on_home', true)->orderBy('sort_order');
+        return $query->active()->where('show_on_home', 1)->orderBy('sort_order');
     }
 }

@@ -21,6 +21,6 @@ class NewsCategory extends Model
 
     public function scopeActive(Builder $query): Builder
     {
-        return $query->where('is_active', true)->orderBy('sort_order');
+        return $query->where('is_active', 1)->orderBy('sort_order');
     }
 }

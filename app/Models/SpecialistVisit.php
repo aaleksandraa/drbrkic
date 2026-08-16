@@ -54,7 +54,7 @@ class SpecialistVisit extends Model
 
     public function scopeUpcoming(Builder $query): Builder
     {
-        return $query->where('is_active', true)
+        return $query->where('is_active', 1)
             ->whereDate('visit_date', '>=', now()->toDateString())
             ->orderBy('visit_date')
             ->orderBy('start_time');

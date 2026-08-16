@@ -16,7 +16,7 @@ class HandleRedirects
 
         if (! str_starts_with($path, '/admin') && $request->isMethod('GET') && Schema::hasTable('redirects')) {
             $redirect = Redirect::query()
-                ->where('is_active', true)
+                ->where('is_active', 1)
                 ->where('from_path', $path)
                 ->first();
 

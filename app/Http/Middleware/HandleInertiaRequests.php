@@ -38,18 +38,29 @@ class HandleInertiaRequests extends Middleware
                 'instagram' => SiteSetting::val('instagram', 'https://www.instagram.com/drbrkic/'),
                 'linkedin' => SiteSetting::val('linkedin', 'https://www.linkedin.com/company/dr-brkic'),
             ],
-            'nav' => fn () => Cache::remember('nav.items', 300, function () {
+            'nav' => function () {
                 if (! Schema::hasTable('departments')) {
                     return ['departments' => [], 'services' => []];
                 }
 
-                return [
+                $cached = Cache::get('nav.items');
+                if (is_array($cached) && (($cached['departments'] ?? []) !== [] || ($cached['services'] ?? []) !== [])) {
+                    return $cached;
+                }
+
+                $nav = [
                     'departments' => Department::active()->orderBy('sort_order')
                         ->get(['name', 'slug'])->toArray(),
                     'services' => Service::active()->orderBy('sort_order')
                         ->get(['name', 'slug'])->toArray(),
                 ];
-            }),
+
+                if ($nav['departments'] !== [] || $nav['services'] !== []) {
+                    Cache::put('nav.items', $nav, 300);
+                }
+
+                return $nav;
+            },
         ]);
     }
 }

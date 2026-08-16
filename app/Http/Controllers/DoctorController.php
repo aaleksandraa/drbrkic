@@ -29,7 +29,7 @@ class DoctorController extends Controller
             ]);
 
         $departments = Department::active()
-            ->whereHas('doctors', fn ($q) => $q->where('is_active', true))
+            ->whereHas('doctors', fn ($q) => $q->where('is_active', 1))
             ->orderBy('sort_order')
             ->get(['name', 'slug']);
 

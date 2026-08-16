@@ -41,6 +41,6 @@ class NewsArticle extends Model
 
     public function scopeForHome(Builder $query): Builder
     {
-        return $query->published()->where('show_on_home', true)->orderByDesc('published_at');
+        return $query->published()->where('show_on_home', 1)->orderByDesc('published_at');
     }
 }

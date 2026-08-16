@@ -91,7 +91,7 @@ class HomeController extends Controller
     private function upcomingVisits(): array
     {
         return \App\Models\SpecialistVisit::upcoming()
-            ->where('show_on_home', true)
+            ->where('show_on_home', 1)
             ->with(['department:id,name,slug', 'news:id,slug,status'])
             ->limit(6)
             ->get()
