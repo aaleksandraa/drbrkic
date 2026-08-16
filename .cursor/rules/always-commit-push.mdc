@@ -1,0 +1,13 @@
+---
+description: Always commit and push every change to GitHub after finishing work
+alwaysApply: true
+---
+
+# Uvijek commit i push
+
+Nakon svake završene izmjene u ovom projektu, **obavezno** napravi git commit i `git push` na `origin` (`git@github.com:aaleksandraa/drbrkic.git`). Ne čekaj da korisnik to posebno zatraži.
+
+- Commit poruka: kratka, na bosanskom/hrvatskom ili engleskom, fokus na *zašto*
+- Ne commituj `.env`, tajne, `vendor`, `node_modules`
+- Ne mijenjaj git config
+- Push na trenutni branch (`main` osim ako nije drugačije rečeno)

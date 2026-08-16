@@ -1,0 +1,31 @@
+---
+description: Keep numbers and icons inline with their text, never stacked above as a separate row
+alwaysApply: true
+---
+
+# Brojevi i ikone uz tekst
+
+Brojeve (`01`, `02`) i ikone (kalendar, pin, telefon, WhatsApp) uvijek stavi **u isti red** s naslovom ili labelom. Ne izdvajaj ih u zaseban red iznad teksta.
+
+```tsx
+// ❌ BAD — broj izdvojen iznad
+<span className="meta-label">01</span>
+<p className="mt-2">Limfedem</p>
+
+// ✅ GOOD — broj pored naslova, opis ispod naslova
+<li className="flex gap-3">
+  <span className="shrink-0 tabular-nums text-teal-600">01</span>
+  <div>
+    <p className="font-semibold">Limfedem</p>
+    <p className="text-ink-soft">Podrška kod limfnog otoka.</p>
+  </div>
+</li>
+
+// ✅ GOOD — ikona u liniji s tekstom
+<p className="flex items-center gap-2">
+  <PinIcon className="size-[1em] shrink-0" />
+  ZU Dr Brkić, Doboj
+</p>
+```
+
+Dugmad već imaju `inline-flex items-center gap-2` — zadrži to. SectionMeta (`01 — O tretmanu`) je izuzetak jer je to oznaka cijele sekcije, ne stavka liste.

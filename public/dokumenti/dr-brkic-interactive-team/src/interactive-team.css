@@ -1,0 +1,200 @@
+.interactive-team {
+  --team-radius: 26px;
+  --team-card-bg: rgba(255, 255, 255, 0.92);
+  --team-card-border: rgba(255, 255, 255, 0.68);
+  --team-ink: #15211b;
+  --team-muted: #647069;
+  --team-accent: #2e7d5b;
+  width: 100%;
+}
+
+.interactive-team__stage {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--team-radius);
+  background: #eceeea;
+  isolation: isolate;
+}
+
+.interactive-team__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 2048 / 1365;
+}
+
+.interactive-team__base-image {
+  transition: filter 420ms cubic-bezier(.2,.75,.2,1), opacity 420ms ease;
+  will-change: filter;
+}
+
+.interactive-team--active .interactive-team__base-image {
+  filter: grayscale(1) saturate(0) brightness(.88) contrast(.96);
+}
+
+.interactive-team__active-image {
+  pointer-events: none;
+  filter: saturate(1.06) contrast(1.035) brightness(1.02);
+  animation: team-person-in 260ms cubic-bezier(.2,.8,.2,1) both;
+}
+
+@keyframes team-person-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.interactive-team__person {
+  outline: none;
+  cursor: default;
+}
+
+.interactive-team__person[role='link'] {
+  cursor: pointer;
+}
+
+.interactive-team__hit-polygon {
+  fill: rgba(255,255,255,.001);
+  stroke: transparent;
+  stroke-width: 3;
+  pointer-events: all;
+  transition: fill 160ms ease, stroke 160ms ease;
+}
+
+.interactive-team__hit-polygon[data-debug='true'] {
+  fill: rgba(46, 125, 91, .18);
+  stroke: rgba(46, 125, 91, .95);
+}
+
+.interactive-team__person:focus-visible .interactive-team__hit-polygon {
+  stroke: rgba(255,255,255,.95);
+  stroke-width: 5;
+}
+
+.interactive-team__debug-number {
+  pointer-events: none;
+  fill: #fff;
+  stroke: #111;
+  stroke-width: 5px;
+  paint-order: stroke;
+  font: 700 30px/1 system-ui, sans-serif;
+}
+
+.interactive-team__card {
+  position: absolute;
+  z-index: 5;
+  min-width: min(260px, 34vw);
+  max-width: min(340px, 38vw);
+  padding: 16px 18px 15px;
+  border: 1px solid var(--team-card-border);
+  border-radius: 16px;
+  background: var(--team-card-bg);
+  color: var(--team-ink);
+  box-shadow: 0 18px 55px rgba(18, 32, 25, .18);
+  backdrop-filter: blur(15px) saturate(1.1);
+  -webkit-backdrop-filter: blur(15px) saturate(1.1);
+  animation: team-card-in 180ms ease-out both;
+  transform-origin: 50% 100%;
+}
+
+.interactive-team__card--left {
+  transform: translate(12px, -50%);
+}
+
+.interactive-team__card--center {
+  transform: translate(-50%, calc(-100% - 16px));
+}
+
+.interactive-team__card--right {
+  transform: translate(calc(-100% - 12px), -50%);
+}
+
+@keyframes team-card-in {
+  from { opacity: 0; translate: 0 7px; }
+  to { opacity: 1; translate: 0 0; }
+}
+
+.interactive-team__card-kicker {
+  margin-bottom: 5px;
+  color: var(--team-accent);
+  font: 700 10px/1.1 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: .14em;
+}
+
+.interactive-team__card-name {
+  font: 700 clamp(15px, 1.35vw, 20px)/1.18 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  letter-spacing: -.015em;
+}
+
+.interactive-team__card-title {
+  margin-top: 4px;
+  color: var(--team-muted);
+  font: 500 clamp(12px, .95vw, 14px)/1.35 system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.interactive-team__card-link {
+  display: inline-flex;
+  gap: 7px;
+  align-items: center;
+  margin-top: 11px;
+  color: var(--team-accent);
+  text-decoration: none;
+  font: 700 12px/1 system-ui, sans-serif;
+}
+
+.interactive-team__card-link span {
+  transition: transform 180ms ease;
+}
+
+.interactive-team__card-link:hover span {
+  transform: translateX(3px);
+}
+
+.interactive-team__mobile-help {
+  display: none;
+  margin: 10px 2px 0;
+  color: #6b746f;
+  font: 500 12px/1.4 system-ui, sans-serif;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .interactive-team__mobile-help {
+    display: block;
+  }
+
+  .interactive-team__card {
+    min-width: 190px;
+    max-width: min(260px, 72vw);
+    padding: 12px 14px;
+    border-radius: 13px;
+  }
+
+  .interactive-team__card-name {
+    font-size: 14px;
+  }
+
+  .interactive-team__card-title {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 720px) {
+  .interactive-team {
+    --team-radius: 18px;
+  }
+
+  .interactive-team__stage {
+    /* Keep the whole team visible on mobile. If faces become too small,
+       replace this with a horizontally-scrollable variant. */
+    overflow: hidden;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .interactive-team__base-image,
+  .interactive-team__active-image,
+  .interactive-team__card,
+  .interactive-team__card-link span {
+    animation: none !important;
+    transition: none !important;
+  }
+}
