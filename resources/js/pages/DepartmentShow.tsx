@@ -2,7 +2,6 @@ import { Link, usePage } from '@inertiajs/react';
 import SiteLayout from '@/layout/SiteLayout';
 import PageHero from '@/components/PageHero';
 import FaqAccordion from '@/components/FaqAccordion';
-import PhotoGallery from '@/components/PhotoGallery';
 import ClinicImage from '@/components/ClinicImage';
 import PhoneIcon from '@/components/PhoneIcon';
 import PreparationGuide from '@/components/PreparationGuide';
@@ -206,7 +205,6 @@ export default function DepartmentShow({ department, otherDepartments, seo }: De
                             </section>
                         )}
 
-                        <PhotoGallery crops={department.gallery} />
                     </div>
 
                     <aside className="space-y-8 lg:pt-2">
