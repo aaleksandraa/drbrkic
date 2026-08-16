@@ -44,7 +44,7 @@ function SpotlightNews({ news }: { news: HomeNewsArticle[] }) {
             href={`/novosti/${article.slug}`}
             className="group flex w-full max-w-lg overflow-hidden rounded-xl border border-white/28 bg-teal-950/70 text-left shadow-[0_10px_28px_rgb(0_0_0/0.35)] backdrop-blur-md transition-colors hover:border-teal-300/55 hover:bg-teal-950/80"
         >
-            <span className="relative isolate min-h-[6.5rem] w-[6.25rem] shrink-0 overflow-hidden sm:w-[8.25rem]">
+            <span className="relative isolate min-h-[5rem] w-[5rem] shrink-0 overflow-hidden sm:min-h-[6.5rem] sm:w-[8.25rem]">
                 <ClinicImage
                     crop={article.image ?? 'fasada'}
                     decorative
@@ -52,7 +52,7 @@ function SpotlightNews({ news }: { news: HomeNewsArticle[] }) {
                     sizes="132px"
                 />
             </span>
-            <span className="flex min-w-0 flex-1 flex-col justify-center px-4 py-3.5 sm:px-5">
+            <span className="flex min-w-0 flex-1 flex-col justify-center px-3 py-2.5 sm:px-5 sm:py-3.5">
                 <span className="flex flex-wrap items-center gap-x-2.5 gap-y-1">
                     <span className="rounded-full bg-teal-400/25 px-2 py-0.5 text-[0.7rem] font-semibold text-teal-100">
                         {article.category ?? 'Novost'}
@@ -61,10 +61,10 @@ function SpotlightNews({ news }: { news: HomeNewsArticle[] }) {
                         <span className="text-[0.75rem] tabular-nums text-white/60">{article.publishedAt}</span>
                     )}
                 </span>
-                <span className="mt-1.5 font-display text-[1.05rem] font-semibold leading-snug text-white transition-colors group-hover:text-teal-200 sm:text-[1.12rem]">
+                <span className="mt-1 font-display text-[0.95rem] font-semibold leading-snug text-white transition-colors group-hover:text-teal-200 sm:mt-1.5 sm:text-[1.12rem]">
                     {article.title}
                 </span>
-                <span className="mt-2 inline-flex items-center gap-1.5 text-[0.8rem] font-medium text-teal-200">
+                <span className="mt-1.5 hidden items-center gap-1.5 text-[0.8rem] font-medium text-teal-200 sm:inline-flex">
                     Pročitajte
                     <svg aria-hidden="true" viewBox="0 0 16 12" className="h-2 w-3.5 transition-transform group-hover:translate-x-0.5" fill="none" stroke="currentColor" strokeWidth="1.6">
                         <path d="M0 6h14M10 2l4 4-4 4" />
@@ -78,8 +78,8 @@ function SpotlightNews({ news }: { news: HomeNewsArticle[] }) {
 /** Muted cyan strip — upcoming visits in a single row. */
 function VisitsBar({ visits, phone }: { visits: SpecialistVisitItem[]; phone: string }) {
     return (
-        <div className="flex flex-col gap-3 rounded-xl bg-teal-600 px-5 py-3.5 sm:flex-row sm:items-center sm:gap-5">
-            <p className="shrink-0 text-[1rem] font-semibold tracking-[-0.01em] text-white">
+        <div className="flex flex-col gap-2 rounded-xl bg-teal-600 px-3.5 py-2.5 sm:flex-row sm:items-center sm:gap-5 sm:px-5 sm:py-3.5">
+            <p className="shrink-0 text-[0.9rem] font-semibold tracking-[-0.01em] text-white sm:text-[1rem]">
                 Dolasci specijalista
             </p>
 
@@ -108,12 +108,12 @@ function VisitsBar({ visits, phone }: { visits: SpecialistVisitItem[]; phone: st
                                 {visit.href ? (
                                     <Link
                                         href={visit.href}
-                                        className="flex shrink-0 items-center gap-3 rounded-lg bg-white/15 px-3.5 py-2 text-white transition-colors hover:bg-white/25"
+                                        className="flex shrink-0 items-center gap-2 rounded-lg bg-white/15 px-3 py-1.5 text-white transition-colors hover:bg-white/25 sm:gap-3 sm:px-3.5 sm:py-2"
                                     >
                                         {content}
                                     </Link>
                                 ) : (
-                                    <div className="flex shrink-0 items-center gap-3 rounded-lg bg-white/15 px-3.5 py-2 text-white">
+                                    <div className="flex shrink-0 items-center gap-2 rounded-lg bg-white/15 px-3 py-1.5 text-white sm:gap-3 sm:px-3.5 sm:py-2">
                                         {content}
                                     </div>
                                 )}
@@ -129,7 +129,7 @@ function VisitsBar({ visits, phone }: { visits: SpecialistVisitItem[]; phone: st
 
             <a
                 href={telHref(phone)}
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-4 py-2.5 text-[0.95rem] font-semibold text-teal-800 transition-colors hover:bg-teal-50"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-white px-3.5 py-2 text-[0.88rem] font-semibold text-teal-800 transition-colors hover:bg-teal-50 sm:px-4 sm:py-2.5 sm:text-[0.95rem]"
             >
                 <PhoneIcon className="size-4" />
                 Zakažite
@@ -208,10 +208,10 @@ export default function Hero({ visits, news }: HeroProps) {
                 }}
             />
 
-            <div className="mx-auto flex w-full max-w-[1360px] flex-1 flex-col px-4 py-10 sm:px-6 lg:min-h-[calc(100svh-124px)] lg:px-10 lg:pb-5 lg:pt-16">
-                <div className="mt-auto mb-4 text-center lg:mb-16 lg:border-l-2 lg:border-teal-400/80 lg:pl-6 lg:text-left">
+            <div className="mx-auto flex w-full max-w-[1360px] flex-1 flex-col px-4 py-5 sm:px-6 lg:min-h-[calc(100svh-124px)] lg:px-10 lg:pb-5 lg:pt-16">
+                <div className="mb-3 text-center lg:mt-auto lg:mb-16 lg:border-l-2 lg:border-teal-400/80 lg:pl-6 lg:text-left">
                     <p
-                        className="hero-rise mb-3 text-[0.78rem] font-medium tracking-[0.04em] text-teal-200 [text-shadow:0_1px_12px_rgb(0_0_0/0.35)] sm:text-[0.85rem]"
+                        className="hero-rise mb-2 text-[0.72rem] font-medium tracking-[0.04em] text-teal-200 [text-shadow:0_1px_12px_rgb(0_0_0/0.35)] sm:mb-3 sm:text-[0.85rem]"
                         style={{ '--rise-delay': '0ms' } as React.CSSProperties}
                     >
                         20 godina uz vas
@@ -222,7 +222,7 @@ export default function Hero({ visits, news }: HeroProps) {
                     </p>
 
                     <h1
-                        className="hero-rise font-display text-[1.9rem] font-bold leading-[1.12] tracking-[-0.02em] text-white [text-shadow:0_1px_18px_rgb(0_0_0/0.4)] sm:text-[2.45rem] lg:text-[3.05rem] lg:leading-[1.08] xl:text-[3.25rem]"
+                        className="hero-rise font-display text-[1.5rem] font-bold leading-[1.14] tracking-[-0.02em] text-white [text-shadow:0_1px_18px_rgb(0_0_0/0.4)] sm:text-[2.45rem] lg:text-[3.05rem] lg:leading-[1.08] xl:text-[3.25rem]"
                         style={{ '--rise-delay': '60ms' } as React.CSSProperties}
                     >
                         Specijalistički pregledi, ultrazvuk i dijagnostika u Doboju
@@ -237,18 +237,18 @@ export default function Hero({ visits, news }: HeroProps) {
                     </p>
 
                     <div
-                        className="hero-rise mt-6 flex flex-wrap items-center justify-center gap-3 lg:mt-7 lg:justify-start"
+                        className="hero-rise mt-4 flex flex-wrap items-center justify-center gap-2 sm:gap-3 lg:mt-7 lg:justify-start"
                         style={{ '--rise-delay': '180ms' } as React.CSSProperties}
                     >
                         <Link
                             href="/kontakt"
-                            className="rounded-full bg-teal-600 px-7 py-3 text-[0.92rem] font-semibold text-white shadow-lg shadow-teal-950/25 transition-colors hover:bg-teal-700"
+                            className="rounded-full bg-teal-600 px-5 py-2.5 text-[0.85rem] font-semibold text-white shadow-lg shadow-teal-950/25 transition-colors hover:bg-teal-700 sm:px-7 sm:py-3 sm:text-[0.92rem]"
                         >
                             Zakažite pregled
                         </Link>
                         <a
                             href="#usluge"
-                            className="rounded-full bg-crimson px-7 py-3 text-[0.92rem] font-semibold text-white shadow-lg shadow-crimson/25 transition-colors hover:bg-[#c41c2d]"
+                            className="rounded-full bg-crimson px-5 py-2.5 text-[0.85rem] font-semibold text-white shadow-lg shadow-crimson/25 transition-colors hover:bg-[#c41c2d] sm:px-7 sm:py-3 sm:text-[0.92rem]"
                         >
                             Naše usluge
                         </a>
@@ -261,17 +261,17 @@ export default function Hero({ visits, news }: HeroProps) {
                     </div>
 
                     <div
-                        className="hero-rise mt-6 flex justify-center lg:mt-7 lg:justify-start"
+                        className="hero-rise mt-4 flex justify-center lg:mt-7 lg:justify-start"
                         style={{ '--rise-delay': '200ms' } as React.CSSProperties}
                     >
                         <SpotlightNews news={news} />
                     </div>
                 </div>
 
-                <div className="hero-rise mt-3 space-y-3 lg:mt-10" style={{ '--rise-delay': '280ms' } as React.CSSProperties}>
+                <div className="hero-rise mt-3 space-y-2.5 lg:mt-10 lg:space-y-3" style={{ '--rise-delay': '280ms' } as React.CSSProperties}>
                     <VisitsBar visits={visits} phone={settings.phonePrimary} />
 
-                    <div className="grid grid-cols-1 gap-4 rounded-xl bg-teal-950/25 px-4 py-3.5 sm:grid-cols-3 sm:items-center sm:gap-6 lg:px-5">
+                    <div className="grid grid-cols-1 gap-3 rounded-xl bg-teal-950/25 px-3 py-2.5 sm:grid-cols-3 sm:items-center sm:gap-6 sm:px-4 sm:py-3.5 lg:px-5">
                         <QuickInfoItems settings={settings} />
                     </div>
                 </div>
