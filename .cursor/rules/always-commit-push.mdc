@@ -5,7 +5,7 @@ alwaysApply: true
 
 # Uvijek commit i push
 
-Nakon svake završene izmjene u ovom projektu, **obavezno** napravi git commit i `git push` na `origin` (`git@github.com:aaleksandraa/drbrkic.git`). Ne čekaj da korisnik to posebno zatraži.
+Nakon svake završene izmjene u ovom projektu, **obavezno** napravi git commit i `git push` na `origin` (GitHub: [aaleksandraa/drbrkic](https://github.com/aaleksandraa/drbrkic)). Ne čekaj da korisnik to posebno zatraži.
 
 - Commit poruka: kratka, na bosanskom/hrvatskom ili engleskom, fokus na *zašto*
 - Ne commituj `.env`, tajne, `vendor`, `node_modules`
