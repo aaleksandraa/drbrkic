@@ -229,7 +229,7 @@ export default function Hero({ visits, news }: HeroProps) {
                     </h1>
 
                     <p
-                        className="hero-rise mt-4 max-w-none text-[0.98rem] leading-relaxed text-white/82 [text-shadow:0_1px_12px_rgb(0_0_0/0.35)] lg:mt-5 lg:text-[1.05rem]"
+                        className="hero-rise mt-4 hidden max-w-none text-[0.98rem] leading-relaxed text-white/82 [text-shadow:0_1px_12px_rgb(0_0_0/0.35)] lg:mt-5 lg:block lg:text-[1.05rem]"
                         style={{ '--rise-delay': '120ms' } as React.CSSProperties}
                     >
                         Radiologija i ultrazvuk, laboratorijske analize, porodična medicina, medicina
@@ -248,11 +248,11 @@ export default function Hero({ visits, news }: HeroProps) {
                         </Link>
                         <a
                             href="#usluge"
-                            className="rounded-full border border-white/30 px-7 py-3 text-[0.92rem] font-semibold text-white backdrop-blur-sm transition-colors hover:border-white/60 hover:bg-white/10"
+                            className="rounded-full bg-crimson px-7 py-3 text-[0.92rem] font-semibold text-white shadow-lg shadow-crimson/25 transition-colors hover:bg-[#c41c2d]"
                         >
                             Naše usluge
                         </a>
-                        <a href={telHref(settings.phonePrimary)} className="group px-1 py-2.5 text-[0.9rem] text-white/75">
+                        <a href={telHref(settings.phonePrimary)} className="group hidden px-1 py-2.5 text-[0.9rem] text-white/75 lg:inline">
                             ili pozovite{' '}
                             <span className="font-semibold tabular-nums text-white underline decoration-teal-400 decoration-2 underline-offset-4 transition-colors group-hover:text-teal-200">
                                 {settings.phonePrimary}
