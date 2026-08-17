@@ -1,10 +1,9 @@
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import SiteLayout from '@/layout/SiteLayout';
-import VersionBanner from '@/components/home-v2/VersionBanner';
 import HeroV2 from '@/components/home-v2/HeroV2';
 import QuickAccessV2 from '@/components/home-v2/QuickAccessV2';
-import VisitsAndStatsV2 from '@/components/home-v2/VisitsAndStatsV2';
 import DepartmentsV2 from '@/components/home-v2/DepartmentsV2';
+import VisitsAndStatsV2 from '@/components/home-v2/VisitsAndStatsV2';
 import DoctorsV2 from '@/components/home-v2/DoctorsV2';
 import NewsV2 from '@/components/home-v2/NewsV2';
 import ContactPreviewV2 from '@/components/home-v2/ContactPreviewV2';
@@ -30,14 +29,19 @@ export default function HomeV2({ departments, doctors, news, specialistVisits, s
             <Head>
                 <meta name="robots" content="noindex, nofollow" />
             </Head>
-            <VersionBanner />
-            <HeroV2 departments={departments} />
+            <HeroV2 />
             <QuickAccessV2 departments={departments} />
-            <VisitsAndStatsV2 visits={specialistVisits} />
             <DepartmentsV2 departments={departments} />
+            <VisitsAndStatsV2 visits={specialistVisits} />
             <DoctorsV2 doctors={doctors} />
             <NewsV2 news={news} />
             <ContactPreviewV2 />
+            <p className="border-t border-ink/8 bg-mineral px-4 py-2.5 text-center text-[0.78rem] text-ink-faint">
+                Prijedlog početne (v2) ·{' '}
+                <Link href="/" className="font-semibold text-teal-700 hover:text-teal-900">
+                    trenutna verzija
+                </Link>
+            </p>
         </SiteLayout>
     );
 }

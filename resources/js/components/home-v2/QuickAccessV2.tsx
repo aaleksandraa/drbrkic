@@ -24,18 +24,18 @@ const ACCESS: Record<string, { title?: string; text: string; icon: IconComp }> =
 
 export default function QuickAccessV2({ departments }: { departments: HomeDepartment[] }) {
     return (
-        <section id="usluge" aria-labelledby="brzi-pristup-naslov" className="bg-mineral py-14 lg:py-20">
+        <section id="usluge" aria-labelledby="brzi-pristup-naslov" className="bg-white py-12 lg:py-16">
             <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-10">
                 <Reveal>
                     <h2
                         id="brzi-pristup-naslov"
-                        className="font-display text-2xl font-bold tracking-[-0.02em] text-ink sm:text-3xl"
+                        className="font-display text-[1.65rem] font-bold tracking-[-0.02em] text-ink sm:text-[1.85rem]"
                     >
                         Brzi pristup uslugama
                     </h2>
                 </Reveal>
 
-                <Reveal className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 xl:gap-4">
+                <Reveal className="mt-7 grid gap-3 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
                     {departments.map((department) => {
                         const meta = ACCESS[department.slug];
                         const Icon = meta?.icon ?? StethoscopeIcon;
@@ -46,13 +46,13 @@ export default function QuickAccessV2({ departments }: { departments: HomeDepart
                             <Link
                                 key={department.slug}
                                 href={`/odjeljenja/${department.slug}`}
-                                className="group rounded-lg border border-ink/10 bg-paper px-5 py-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-teal-500/40 hover:shadow-[0_16px_36px_-24px_rgba(13,61,54,0.4)]"
+                                className="group rounded-md border border-ink/8 bg-white px-4 py-5 transition-colors hover:border-teal-500/40 hover:bg-teal-50/40"
                             >
-                                <Icon className="size-8 text-teal-600" />
-                                <h3 className="mt-4 font-display text-[1.02rem] font-semibold leading-snug text-ink transition-colors group-hover:text-teal-800">
+                                <Icon className="size-9 text-teal-600" />
+                                <h3 className="mt-4 font-display text-[0.98rem] font-semibold leading-snug text-ink group-hover:text-teal-800">
                                     {title}
                                 </h3>
-                                <p className="mt-1.5 text-[0.86rem] leading-relaxed text-ink-soft">{text}</p>
+                                <p className="mt-1.5 text-[0.82rem] leading-relaxed text-ink-soft">{text}</p>
                             </Link>
                         );
                     })}
