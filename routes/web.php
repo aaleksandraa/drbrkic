@@ -10,6 +10,7 @@ use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/v2', [HomeController::class, 'v2'])->name('home.v2');
 Route::get('/o-nama', [PageController::class, 'about'])->name('about');
 Route::get('/cjenovnik', [PageController::class, 'priceList'])->name('price-list');
 

@@ -15,6 +15,26 @@ class HomeController extends Controller
 {
     public function index(): Response
     {
+        return Inertia::render('Home', $this->homeProps(
+            path: '/',
+            jsonLd: [Seo::clinic()],
+        ));
+    }
+
+    public function v2(): Response
+    {
+        return Inertia::render('HomeV2', $this->homeProps(
+            path: '/v2',
+            jsonLd: [],
+        ));
+    }
+
+    /**
+     * @param  array<int, array<string, mixed>>  $jsonLd
+     * @return array<string, mixed>
+     */
+    private function homeProps(string $path, array $jsonLd): array
+    {
         $departments = Department::forHome()
             ->with(['services' => fn ($q) => $q->active()->orderBy('sort_order')])
             ->get()
@@ -70,21 +90,19 @@ class HomeController extends Controller
                 'publishedAtIso' => $a->published_at?->toDateString(),
             ]);
 
-        $visits = $this->upcomingVisits();
-
-        return Inertia::render('Home', [
+        return [
             'departments' => $departments,
             'services' => $services,
             'doctors' => $doctors,
             'news' => $news,
-            'specialistVisits' => $visits,
+            'specialistVisits' => $this->upcomingVisits(),
             'seo' => Seo::make(
                 title: 'Specijalistički pregledi, ultrazvuk i dijagnostika u Doboju | ZU SC Dr Brkić',
                 description: SiteSetting::val('meta_description', 'Radiologija i ultrazvuk, laboratorijske analize, porodična medicina, medicina rada i fizijatrija, stručna zdravstvena zaštita na jednom mjestu.'),
-                path: '/',
-                jsonLd: [Seo::clinic()],
+                path: $path,
+                jsonLd: $jsonLd,
             ),
-        ]);
+        ];
     }
 
     /** @return array<int, array<string, mixed>> */
