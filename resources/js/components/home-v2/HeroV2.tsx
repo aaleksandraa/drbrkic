@@ -13,26 +13,28 @@ const HERO_SERVICES = [
 export default function HeroV2() {
     return (
         <section aria-label="Uvod" className="relative isolate overflow-hidden bg-[#1a2224]">
-            <div className="absolute inset-y-0 right-0 -z-10 w-full lg:w-[56%]">
-                <ClinicImage
-                    crop="fasada"
-                    priority
-                    className="size-full object-cover object-[62%_center] lg:object-[center_center]"
-                    sizes="(min-width: 1024px) 56vw, 100vw"
-                />
-                <div
-                    aria-hidden="true"
-                    className="absolute inset-0 lg:hidden"
-                    style={{
-                        background:
-                            'linear-gradient(to bottom, rgb(26 34 36 / 0.62) 0%, rgb(26 34 36 / 0.78) 55%, rgb(26 34 36 / 0.94) 100%)',
-                    }}
-                />
-                <div
-                    aria-hidden="true"
-                    className="absolute inset-y-0 left-0 hidden w-40 bg-gradient-to-r from-[#1a2224] to-transparent lg:block"
-                />
-            </div>
+            <ClinicImage
+                crop="fasada"
+                priority
+                className="absolute inset-0 -z-10 size-full object-cover object-[68%_center] lg:object-[center_center]"
+                sizes="100vw"
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 lg:hidden"
+                style={{
+                    background:
+                        'linear-gradient(to bottom, rgb(26 34 36 / 0.42) 0%, rgb(26 34 36 / 0.62) 42%, rgb(26 34 36 / 0.88) 100%)',
+                }}
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 hidden lg:block"
+                style={{
+                    background:
+                        'linear-gradient(90deg, rgb(26 34 36 / 0.94) 0%, rgb(26 34 36 / 0.82) 22%, rgb(26 34 36 / 0.58) 40%, rgb(26 34 36 / 0.28) 58%, rgb(26 34 36 / 0.10) 74%, rgb(26 34 36 / 0.02) 88%, transparent 100%)',
+                }}
+            />
 
             <div className="mx-auto flex min-h-[30rem] w-full max-w-[1360px] items-center px-4 py-16 sm:min-h-[34rem] sm:px-6 lg:min-h-[38rem] lg:px-10 lg:py-20 xl:min-h-[42rem]">
                 <div className="max-w-xl lg:max-w-[36rem]">
@@ -69,7 +71,7 @@ export default function HeroV2() {
                             Zakažite pregled
                         </Link>
                         <a
-                            href="#usluge"
+                            href="#odjeljenja"
                             className="inline-flex items-center gap-2 rounded-md border border-white/80 px-5 py-3 text-[0.92rem] font-semibold text-white transition-colors hover:bg-white/10"
                         >
                             Pogledajte usluge

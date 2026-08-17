@@ -18,7 +18,7 @@ const CARD_IMAGE: Record<string, string> = {
 
 export default function DepartmentsV2({ departments }: { departments: HomeDepartment[] }) {
     return (
-        <section id="odjeljenja" aria-labelledby="odjeljenja-naslov" className="bg-white pb-14 lg:pb-20">
+        <section id="odjeljenja" aria-labelledby="odjeljenja-naslov" className="bg-white py-14 lg:py-20">
             <div className="mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-10">
                 <Reveal>
                     <h2
